@@ -1,9 +1,9 @@
 from tkinter import *
 root = Tk()
 
-photo = photoImage(file= '')
-labelphoto = label(root, image = photo)
-labelphoto.pack()
+photo = PhotoImage(file= 'afbeelding.jpg')
+label = label(root, image = photo)
+label.pack()
 
 
 mainloop()
