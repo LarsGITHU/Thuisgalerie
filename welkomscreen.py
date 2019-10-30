@@ -70,8 +70,9 @@ def registratieFrame():
     gHouder_email_label.grid(row=1,column=0, padx=5, pady=5)
     gHouder_postcode_label.grid(row=2,column=0, padx=5, pady=5)
 
-    terug_button3.grid(row=3, column=2, padx=2, pady=15)
-    inloggen_button3.grid(row=3, column=1, padx=2, pady=15)
+    
+    inloggen_button3.grid(row=3, column=2, padx=2, pady=5)
+    terug_button3.grid(row=4, column=2, padx=2, pady=5)
 
 def gallerieBezoekersFrame():
     pass
@@ -120,6 +121,43 @@ def bezoekersInfo():
 
     except:
         pass
+
+
+def gHouderInfo():
+ 
+    gH_naam = str(gHouder_naam.get())
+    gH_email = str(gHouder_email.get())
+    gH_postcode = str(gHouder_postcode.get())
+
+
+    try:
+        if  gH_naam == "" or gH_email == "" or gH_postcode == "":
+            bericht = "Unvalid input. Probeer nog een keer!"
+            showinfo(title='Not a Valid Input', message=bericht)
+
+        elif gH_naam.isalpha() == False:
+            bericht = "Voer uw naam in"
+            showinfo(title='Not a Valid Input', message=bericht)
+
+        else:
+            ghoudersInfo_dict[gH_naam] = [gH_email, gH_postcode]
+            kunststukkenLijstFrame()
+
+    except:
+        print('Lel')
+        
+
+
+
+
+
+
+
+
+
+
+
+
 
 root= Tk()
 root.geometry("700x250")
@@ -184,7 +222,7 @@ gHouder_postcode_label = Label(master=regFrame, text="Postcode")
 
 terug_button3 = Button(master=regFrame, text="Terug", command=terugRegFrameFirspage)
 
-inloggen_button3 = Button(master=regFrame, text="Inloggen", command="")
+inloggen_button3 = Button(master=regFrame, text="Inloggen", command=gHouderInfo)
 
 
 
@@ -210,6 +248,8 @@ inloggen_button = Button(master=bezoekersFrame, text="Inloggen", command=bezoeke
 
 
 #######################################################################
+
+
 welkom_label = Label(master=FirstPage, text="Welkom in onze programma\nBen je een bezoeker of een galeriehouder?")
 welkom_label.pack(side=TOP, pady=10, padx=10)
 
