@@ -21,6 +21,26 @@ def terugBezoekersNaarFirstpage():
     ghouder_button.pack(side=RIGHT, pady=10, padx=10)
     FirstPage.pack()
 
+def kunststukkenLijstFrame():
+    pass
+
+def leenbareKunststukkenFrame():
+    pass
+
+
+def gallerieBezoekersFrame():
+    pass
+
+def gallerieBezoekersCode():
+    pass
+
+def bezochteKunstwerkFrame():
+    pass
+
+def uitgeleendeKunststukkenFrame():
+    pass
+
+
 
 def bezoekersInfo():
  
@@ -39,6 +59,7 @@ def bezoekersInfo():
 
         else:
             bezoekersInfo_dict[bez_naam] = bez_email
+            kustStukkenLijstFrame()
             return bezoekersInfo_dict
     except:
         pass
