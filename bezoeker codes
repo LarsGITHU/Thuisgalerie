@@ -1,1 +1,16 @@
+from tkinter import *
+import webbrowser
 
+def open():
+    webbrowser.open("https://www.rijksmuseum.nl/nl/tickets/artikelen")
+
+root = Tk()
+
+bezoekersFrameNaInlog = Frame(master=root)
+bezoekersFrameNaInlog.pack(fill="both", expand=True)
+
+
+ButtonNaardewebsite = Button(master=bezoekersFrameNaInlog, text= "kaartje kopen", command=open)
+ButtonNaardewebsite.grid(row=5, column=0, pady=4)
+
+root.mainloop()
