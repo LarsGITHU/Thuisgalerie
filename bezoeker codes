@@ -1,5 +1,6 @@
 from tkinter import *
 import webbrowser
+from PIL import ImageTk,Image
 
 def open():
     webbrowser.open("https://www.rijksmuseum.nl/nl/tickets/artikelen")
@@ -26,6 +27,10 @@ answer = Text(bottomframe)
 scroll.config(command=answer.yview())
 answer.pack()
 
+photo = PhotoImage(file='')
+label = Label(master=bottomframe, image=photo)
+label.image = photo
+label.pack(side=LEFT)
 
 bottomframe.pack(side = BOTTOM)
 
