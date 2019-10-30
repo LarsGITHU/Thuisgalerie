@@ -4,13 +4,34 @@ import webbrowser
 def open():
     webbrowser.open("https://www.rijksmuseum.nl/nl/tickets/artikelen")
 
+
 root = Tk()
+
+
+topframe = Frame(root)
+entry = Entry(master=topframe)
+entry.pack()
+
+button_kunstwerkzoeker = Button(master=topframe, text= "zoek kunstwerk")
+button_kunstwerkzoeker.pack()
+
+topframe.pack(side = TOP)
+
+
+bottomframe = Frame(root)
+
+scroll = Scrollbar(master=bottomframe)
+scroll.pack(side=RIGHT, fill=Y)
+answer = Text(bottomframe)
+scroll.config(command=answer.yview())
+answer.pack()
+
+
+bottomframe.pack(side = BOTTOM)
+
 
 bezoekersFrameNaInlog = Frame(master=root)
 bezoekersFrameNaInlog.pack(fill="both", expand=True)
-
-
-ButtonNaardewebsite = Button(master=bezoekersFrameNaInlog, text= "kaartje kopen", command=open)
-ButtonNaardewebsite.grid(row=5, column=0, pady=4)
-
+ButtonNaardewebsite = Button(master=bottomframe, text= "kaartje kopen", command=open)
+ButtonNaardewebsite.pack()
 root.mainloop()
