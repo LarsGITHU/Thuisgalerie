@@ -1,0 +1,136 @@
+from tkinter import *
+
+def knopkunstwerkselecteren():
+    radiobutton1 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=1)
+    radiobutton1.grid(row=0,
+                      column=0)
+    radiobutton2 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=2)
+    radiobutton2.grid(row=1,
+                      column=0)
+    radiobutton3 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=3)
+    radiobutton3.grid(row=2,
+                      column=0)
+    radiobutton4 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=4)
+    radiobutton4.grid(row=3,
+                      column=0)
+    radiobutton5 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=5)
+    radiobutton5.grid(row=4,
+                      column=0)
+    radiobutton6 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=6)
+    radiobutton6.grid(row=5,
+                      column=0)
+    radiobutton7 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=7)
+    radiobutton7.grid(row=6,
+                      column=0)
+    radiobutton8 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=8)
+    radiobutton8.grid(row=7,
+                      column=0)
+    radiobutton9 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=9)
+    radiobutton9.grid(row=8,
+                      column=0)
+    radiobutton10 = Radiobutton(master=Ghouderpage,
+                               variable=v,
+                               value=10)
+    radiobutton10.grid(row=9,
+                      column=0)
+
+def labeluitgeleend():
+    l1 = StringVar()
+    label1 = Label(master=Ghouderpage,
+                   textvariable=l1)
+    label1.grid(row=0,
+                column=2)
+    l2 = StringVar()
+    label2 = Label(master=Ghouderpage,
+                   textvariable=l2)
+    label2.grid(row=1,
+                column=2)
+    l3 = StringVar()
+    label3 = Label(master=Ghouderpage,
+                   textvariable=l3)
+    label3.grid(row=2,
+                column=2)
+    l4 = StringVar()
+    label4 = Label(master=Ghouderpage,
+                   textvariable=l4)
+    label4.grid(row=3,
+                column=2)
+    l5 = StringVar()
+    label5 = Label(master=Ghouderpage,
+                   textvariable=l5)
+    label5.grid(row=4,
+                column=2)
+    l6 = StringVar()
+    label6 = Label(master=Ghouderpage,
+                   textvariable=l6)
+    label6.grid(row=5,
+                column=2)
+    l7 = StringVar()
+    label7 = Label(master=Ghouderpage,
+                   textvariable=l7)
+    label7.grid(row=6,
+                column=2)
+    l8 = StringVar()
+    label8 = Label(master=Ghouderpage,
+                   textvariable=l8)
+    label8.grid(row=7,
+                column=2)
+    l9 = StringVar()
+    label9 = Label(master=Ghouderpage,
+                   textvariable=l9)
+    label9.grid(row=8,
+                column=2)
+    l10 = StringVar()
+    label10 = Label(master=Ghouderpage,
+                   textvariable=l10)
+    label10.grid(row=9,
+                column=2)
+
+    l1.set("")
+    l2.set("")
+    l3.set("")
+    l4.set("")
+    l5.set("")
+    l6.set("")
+    l7.set("")
+    l8.set("")
+    l9.set("")
+    l10.set("")
+
+def gotonextpagegaleriehouder():
+    NextButton = Button(master=Ghouderpage,
+                        text="Next")
+    NextButton.grid(row=10,
+                    column=2)
+
+root = Tk()
+
+v = IntVar()
+
+Ghouderpage = Frame(master=root)
+
+knopkunstwerkselecteren()
+labeluitgeleend()
+gotonextpagegaleriehouder()
+
+Ghouderpage.pack()
+
+root.mainloop()
