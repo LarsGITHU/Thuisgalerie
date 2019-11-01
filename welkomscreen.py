@@ -3,6 +3,10 @@ from PIL import ImageTk, Image
 from tkinter.messagebox import showinfo
 import random
 import json
+import importlib
+import sys
+import os
+
 
 bezoekersInfo_dict = {}
 ghoudersInfo_dict = {}
@@ -69,8 +73,14 @@ def terugRegNaarRegofLog():
 
 
 
+
+
+
+
+
+
 def kunststukkenLijstFrame():
-    pass
+    importlib.import_module("stukken.py")
 
 
 
@@ -138,8 +148,6 @@ def toonGh_inloggenFrame():
     root.geometry("400x120")
 
 
-def gallerieBezoekersFrame():
-    pass
 
 def gallerieBezoekersCode():
     r = random.randint(1000,9999)
@@ -151,14 +159,11 @@ def gallerieBezoekersCode():
            continue
 
 
-
-
-def gekozenKunstwerkFrame():
-    pass
-
 def uitgeleendeKunststukkenFrame():
     pass
 
+def gallerieBezoekersFrame():
+    pass
 
 
 def bezoekersInfo():
@@ -176,13 +181,25 @@ def bezoekersInfo():
         else:
             bez_code = gallerieBezoekersCode()
             bezoekersInfo_dict[bez_naam] = [bez_email, bez_code]
+
+
             with open('bezoekers-data.txt', 'a') as f:
                 for i, v in bezoekersInfo_dict.items():
                     f.write('{}  {}\n'.format(i, v))
-            kunststukkenLijstFrame()
 
+            with open('bezoekers-data.txt', 'r') as f:
+                alle_bezokers = f.read()
+            
+            kunststukkenLijstFrame()
+            
     except:
         pass
+    
+    try:
+        print(alle_bezokers)
+    except:
+        pass
+
 
 
 def gHouderInfo():
@@ -193,7 +210,9 @@ def gHouderInfo():
     gH_postcode = str(gHouder_postcode.get())
     fn_ln = gH_naam.split()
     
-
+def restart_program():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
     
             
     try:
@@ -225,23 +244,9 @@ def gHouderInfo():
 
 
 
-
-
-
-
-
-
-
-
-
-
 root= Tk()
 root.geometry("700x250")
 root.title("Rijksmuseum App")
-
-
-
-
 
 
 FirstPage = Frame(master=root)
@@ -250,50 +255,7 @@ label = Label(master=FirstPage, image = photo)
 label.image = photo
 label.pack(side=TOP, padx=10)
 
-######################################################################
-"""
-# Max | gekozen kunstwerk lijst frame 
-
-gekozenKunstwerk = Frame(root)
-button_kunstwerkzoeker = Button(master=bezochteKunstwerk, text= "zoek kunstwerk")
-
-gekozenImage = PhotoImage(file='')
-labelImage = Label(master=bottomframe, image=photo)
-labelImage.image = gekozenImage
-label.pack(side=LEFT)
-
-#bezoekersFrameNaInlog = Frame(master=root)
-#bezoekersFrameNaInlog.pack(fill="both", expand=True)
-ButtonNaardewebsite = Button(master=bottomframe, text= "kaartje kopen", command=open)
-ButtonNaardewebsite.pack()
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#######################################################################
 
 gh_inloggenFrame = Frame(master=root)
 gh_inloggenFrame.pack(fill="both", expand=True)
@@ -303,39 +265,6 @@ inloggennaamGhouder_label = Label(master=gh_inloggenFrame, text="Naam")
 emailGhouder_label = Label(master=gh_inloggenFrame, text="Email")
 terug_button_gh = Button(master=gh_inloggenFrame, text="Terug", command=terugRegNaarRegofLog)
 inloggenGhouder_button = Button(master=gh_inloggenFrame, text="Inloggen", command=gH_inlog_info)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #######################################################################
@@ -370,9 +299,6 @@ inloggen_button3 = Button(master=regFrame, text="registreer", command=gHouderInf
 
 
 
-
-
-
 ################################################################
 
 bezoekersFrame = Frame(master=root)
@@ -402,6 +328,9 @@ bezoekers_button.pack(side=LEFT, pady=10, padx=10)
 
 ghouder_button = Button(master=FirstPage, text="Galleriehouder", command=toonRegOfLogFrame)
 ghouder_button.pack(side=RIGHT, pady=10, padx=10)
+
+
+Button(root, text="Restart", command=restart_program).pack(side=BOTTOM, pady=10, padx=10)
 
 
  ########################################################################
