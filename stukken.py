@@ -7,10 +7,16 @@ root = Tk()
 kunststFrame = Frame(master=root)
 root.title("Rijksmuseum kunststukken")
 
+def openlink():
+    open("https://www.rijksmuseum.nl/nl/tickets/artikelen")
+
+
 
 def informatie():
     s = Button(kunststFrame, text="Quit", command=root.destroy).pack(side=BOTTOM)
+    ButtonNaardewebsite = Button(master=kunststFrame, text= "kaartje kopen", command=openlink).pack(side=BOTTOM)
 
+    
     werkstukken_dict = {}
     key = 'Ostta0g5'
 
