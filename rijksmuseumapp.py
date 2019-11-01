@@ -61,8 +61,6 @@ def toonRegOfLogFrame():
     terug_button2.grid(row=1, column=3, pady= 100)
     
 
-
-
 def terugRegNaarRegofLog():
     gh_inloggenFrame.pack_forget()
     regOfLog.pack()
@@ -70,12 +68,6 @@ def terugRegNaarRegofLog():
     log_button.grid(row=0,column=3, padx=50, pady=50)
     terug_button2.grid(row=1, column=3, pady= 100)
     root.geometry("350x320")
-
-
-
-
-
-
 
 
 
@@ -190,16 +182,22 @@ def bezoekersInfo():
             with open('bezoekers-data.txt', 'r') as f:
                 alle_bezokers = f.read()
             
+            print(alle_bezokers)
+
             kunststukkenLijstFrame()
             
     except:
         pass
     
-    try:
-        print(alle_bezokers)
-    except:
-        pass
+    
+  
 
+
+    
+def restart_program():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+    
 
 
 def gHouderInfo():
@@ -209,11 +207,7 @@ def gHouderInfo():
     gH_email = str(gHouder_email.get())
     gH_postcode = str(gHouder_postcode.get())
     fn_ln = gH_naam.split()
-    
-def restart_program():
-    python = sys.executable
-    os.execl(python, python, * sys.argv)
-    
+
             
     try:
         if gH_naam == "" or gH_email == "" or gH_postcode == "":
@@ -330,7 +324,7 @@ ghouder_button = Button(master=FirstPage, text="Galleriehouder", command=toonReg
 ghouder_button.pack(side=RIGHT, pady=10, padx=10)
 
 
-Button(root, text="Restart", command=restart_program).pack(side=BOTTOM, pady=10, padx=10)
+Button(FirstPage, text="Restart", command=restart_program).pack(side=BOTTOM, pady=10, padx=10)
 
 
  ########################################################################
