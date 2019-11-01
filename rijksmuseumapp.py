@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import ImageTk, Image
+from PIL import ImageTk, Image # dezz module moet je zelf installeren: pip install Pillow. Nodig om de Rijksmuseum logo in de eerste pagina te laten zien.
 from tkinter.messagebox import showinfo
 import random
 import json
@@ -14,6 +14,7 @@ uniqueCode = []
 
  
 def toonBezoekersFrame():
+    '''Laat de bezoekers loginframe zien als gedrukt op "bezoekers" is'''
     FirstPage.pack_forget()
     bezoekersFrame.pack()
     inloggennaam_entry.grid(row=1, column=1, pady=5, padx=10)
@@ -25,6 +26,7 @@ def toonBezoekersFrame():
     root.geometry("400x100")
 
 def terugBezoekersNaarFirstpage():
+    '''packt weer de Firstpage nadat er gedrukt op "terug" is'''
     bezoekersFrame.pack_forget()
     root.geometry("700x250")
     welkom_label.pack(side=TOP, pady=10, padx=10)
@@ -33,6 +35,7 @@ def terugBezoekersNaarFirstpage():
     FirstPage.pack()
 
 def terugRegOfLogNaarFirspage():
+    '''packt weer de Firstpage nadat er gedrukt op "terug" is'''
     regOfLog.pack_forget()
     root.geometry("700x250")
     welkom_label.pack(side=TOP, pady=10, padx=10)
@@ -41,6 +44,7 @@ def terugRegOfLogNaarFirspage():
     FirstPage.pack()
 
 def terugRegFrameFirspage():
+    '''packt weer de Firstpage nadat er gedrukt op "terug" is'''
     regFrame.pack_forget()
     root.geometry("700x250")
     welkom_label.pack(side=TOP, pady=10, padx=10)
@@ -51,11 +55,10 @@ def terugRegFrameFirspage():
 
 
 def toonRegOfLogFrame():
+    '''packt de frame waarin je kunt registreren en inloggen als galleriehouder'''
     root.geometry("350x320")
-
     FirstPage.pack_forget()
     regOfLog.pack()
-    
     reg_button.grid(row=0,column=0, padx=50, pady=50)
     log_button.grid(row=0,column=3, padx=50, pady=50)
     terug_button2.grid(row=1, column=3, pady= 100)
@@ -72,39 +75,10 @@ def terugRegNaarRegofLog():
 
 
 def kunststukkenLijstFrame():
+    # importeert de andere gedeelte van de code als een externe module, daarvoor gebruiken we "importlib"
     importlib.import_module("stukken.py")
 
 
-
-def gH_inlog_info():
-    gHI_naam = str(inloggennaamGhouder_entry.get())
-    gHI_email = str(emailGhouder_entry.get())
-
-    with open('gallerihouder-data.json', 'r') as json_file:
-        gh_reg_data = json.load(json_file)
-
-   
-    try:
-    
-        fn_ln_in = gHI_naam.split()[0]
-           
-        if fn_ln_in in gh_reg_data.keys():
-            if (gHI_naam == gh_reg_data[fn_ln_in]['ghouder naam']) and (gHI_email == gh_reg_data[fn_ln_in]['ghouder email']):
-                print('IS GELUKT!')
-                kunststukkenLijstFrame()
-            else:
-                bericht = "Voer de juiste data in A.U.B."
-                showinfo(title='Fout!', message=bericht)
-        else:
-            print(ghoudersInfo_dict)
-            bericht = "Voer de juiste data in A.U.B."
-            showinfo(title='Fout!', message=bericht)
-    
-
-    except:
-        bericht = "Voer uw naam en emailadres in A.U.B."
-        showinfo(title='Not a Valid Input', message=bericht)
-    
 
 
 
@@ -142,8 +116,8 @@ def toonGh_inloggenFrame():
 
 
 def gallerieBezoekersCode():
-    r = random.randint(1000,9999)
-    while True:
+    r = random.randint(1000,9999) # generates een willekeurige, unieke 4-cijferige code en slaat die op in een lijst  en dan checkt die 
+    while True:                    # of de genereerde getal daar te vindn is, om duplicates te vermijden
         if r not in uniqueCode:
             uniqueCode.append(r)
             return r
@@ -159,31 +133,35 @@ def gallerieBezoekersFrame():
 
 
 def bezoekersInfo():
+    # Deze variables halen user entry-input en zetten die als strings in deze variables
     bez_naam = str(inloggennaam_entry.get())   
     bez_email = str(email_entry.get())
     try:
+        # vermijdt lege user-input
         if bez_naam == "" or bez_email == "":
             bericht = "Voer uw naam en emailadres in A.U.B."
             showinfo(title='Not a Valid Input', message=bericht)
 
+        # checkt of de bezoekers eerste naam uit maar geldige charakters bestaat (i.e. alphabetische letters)
         elif bez_naam.isalpha() == False:
             bericht = "Voer uw eerste naam in"
             showinfo(title='Not a Valid Input', message=bericht)
 
         else:
-            bez_code = gallerieBezoekersCode()
+
+            bez_code = gallerieBezoekersCode() # pakt een random unieke user code 
             bezoekersInfo_dict[bez_naam] = [bez_email, bez_code]
 
 
-            with open('bezoekers-data.txt', 'a') as f:
+            with open('bezoekers-data.txt', 'a') as f: # slaat de data op in een text bestandje, een aparte regel voor elk user
                 for i, v in bezoekersInfo_dict.items():
                     f.write('{}  {}\n'.format(i, v))
 
-            with open('bezoekers-data.txt', 'r') as f:
+            with open('bezoekers-data.txt', 'r') as f: 
                 alle_bezokers = f.read()
             
             print(alle_bezokers)
-
+            #wordt de bestandsinhoud in de console geprint, noding voor testen
             kunststukkenLijstFrame()
             
     except:
@@ -195,22 +173,25 @@ def bezoekersInfo():
 
     
 def restart_program():
+    # wordt gebruikt om de programma te herstarten, zie op de merking bij de restart button
     python = sys.executable
     os.execl(python, python, * sys.argv)
     
 
 
 def gHouderInfo():
+    # Een locale ditctionary
     ghouder_dict = {}
-
+    
+    # Deze variables halen user entry-input en zetten die als strings in deze variables
     gH_naam = str(gHouder_naam.get())
     gH_email = str(gHouder_email.get())
     gH_postcode = str(gHouder_postcode.get())
-    fn_ln = gH_naam.split()
+    fn_ln = gH_naam.split() 
 
             
     try:
-        if gH_naam == "" or gH_email == "" or gH_postcode == "":
+        if gH_naam == "" or gH_email == "" or gH_postcode == "": # vermijdt lege input
             bericht = "Unvalid input. Probeer nog een keer!"
             showinfo(title='Not a Valid Input', message=bericht)         
 
@@ -219,15 +200,17 @@ def gHouderInfo():
             ghouder_dict['ghouder email'] = gH_email
             ghouder_dict['ghouder postcode'] = gH_postcode
             gh_firstname = fn_ln[0]
-            ghoudersInfo_dict[gh_firstname] = ghouder_dict
-            json_gh_data = json.dumps(ghoudersInfo_dict, indent=4)
+            ghoudersInfo_dict[gh_firstname] = ghouder_dict # zet de locale dict van een enkel user, en met zijn/haar eerste naam als 'key' in die globale 
+            json_gh_data = json.dumps(ghoudersInfo_dict, indent=4) # zet de data in json format
             
-            with open('gallerihouder-data.json', 'w') as json_file:
-                json_file.write(json_gh_data)
+            with open('gallerihouder-data.json', 'w') as json_file: 
+                json_file.write(json_gh_data) 
             
             print(ghouder_dict)
             print(ghoudersInfo_dict)
-            
+            # gebruikt voor testen 
+
+
             terugRegFrameFirspage()
             toonRegOfLogFrame()
         
@@ -235,6 +218,39 @@ def gHouderInfo():
     except:
         pass
             
+
+def gH_inlog_info():
+
+    # Deze variables halen user entry-input en zetten die als strings in deze variables
+    gHI_naam = str(inloggennaamGhouder_entry.get())
+    gHI_email = str(emailGhouder_entry.get())
+
+    with open('gallerihouder-data.json', 'r') as json_file: 
+        gh_reg_data = json.load(json_file) # Leest de registratie data die opgeslagen als json is, en zet die data om als een python dictionary
+
+   
+    try:
+    
+        fn_ln_in = gHI_naam.split()[0] # Pakt de first name
+           
+        if fn_ln_in in gh_reg_data.keys(): # Zoekt eerst in de keys van de dictionary op te zien of de eerste naam in de dict te vinden is
+            if (gHI_naam == gh_reg_data[fn_ln_in]['ghouder naam']) and (gHI_email == gh_reg_data[fn_ln_in]['ghouder email']): # checkt of de volledige naam en of de email eigenlijk kloppen
+                #print('IS GELUKT!') 
+                #was gebruikt in de testen
+                kunststukkenLijstFrame()
+            else:
+                bericht = "Voer de juiste data in A.U.B."
+                showinfo(title='Fout!', message=bericht)
+        else:
+            print(ghoudersInfo_dict)
+            bericht = "Voer de juiste data in A.U.B."
+            showinfo(title='Fout!', message=bericht)
+    
+
+    except:
+        bericht = "Voer uw naam en emailadres in A.U.B."
+        showinfo(title='Not a Valid Input', message=bericht)
+    
 
 
 
@@ -325,7 +341,8 @@ ghouder_button.pack(side=RIGHT, pady=10, padx=10)
 
 
 Button(FirstPage, text="Restart", command=restart_program).pack(side=BOTTOM, pady=10, padx=10)
-
+# deze button is bedoeld als een workaround een bug die optreedt wanneer je de kunststukkenlijst voor de 1e keer opent en dan ie gaat sluiten,
+# dan kun je hem niet meer openen tenzij je de programma opnieuw start! we konden niet snel genoeg weten waarom dat nou gebeurd en dus maakten we dit als een oplossing.
 
  ########################################################################
 
