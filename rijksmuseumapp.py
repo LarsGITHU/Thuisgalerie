@@ -12,7 +12,7 @@ bezoekersInfo_dict = {}
 ghoudersInfo_dict = {}
 uniqueCode = []
 
-
+ 
 def toonBezoekersFrame():
     FirstPage.pack_forget()
     bezoekersFrame.pack()
